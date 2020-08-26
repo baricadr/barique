@@ -11,16 +11,18 @@ from future import standard_library
 standard_library.install_aliases()
 
 
-class RepositoryClient(Client):
+class FileClient(Client):
 
-    # TODO : Write a generic api call function in Client
-    def list_files(self, path, compare=False)
+    def list(self, path, compare=False):
         """
         List files available from a remote repository for a local path
+
         :type path: str
         :param path: Local path
+
         :type compare: bool
         :param compare: Only list files missing from the local path
+
         :rtype: list
         :return: List of file relative paths
         """
@@ -28,12 +30,16 @@ class RepositoryClient(Client):
         body = {"path": path, "compare": compare}
         return self._api_call("post", "/get_files", body)
 
-    def pull_files(self, path, email="")
+    def pull(self, path, email=""):
         """
+        Launch a pull task
+
         :type path: str
         :param path: Local path to a missing file or folder
+
         :type email: str
         :param email: User email adress for notificatio
+
         :rtype: str
         :return: Id associated to the pull task
         """
@@ -42,4 +48,3 @@ class RepositoryClient(Client):
             body['email'] = email
 
         return self._api_call("post", "/pull", body)['task']
-

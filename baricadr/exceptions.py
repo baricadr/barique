@@ -7,9 +7,11 @@ from future import standard_library
 
 standard_library.install_aliases()
 
+class BaricadrApiError(Exception):
+    """Raised when the API returns an error"""
+    pass
 
 class BaricadrConnectionError(Exception):
     """Raised when the connection to the Barricadr server fails"""
+    pass
 
-class BaricadrEndpointError(Exception):
-    """Raised when the API returns an error"""

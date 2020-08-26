@@ -5,8 +5,8 @@ from __future__ import unicode_literals
 
 import requests
 
-from baricadr.exceptions import ConnectionError
-from baricadr.repository import RepositoryClient
+from baricadr.exceptions import BaricadrConnectionError
+from baricadr.file import FileClient
 from baricadr.task import TaskClient
 
 from future import standard_library
@@ -19,15 +19,15 @@ class BaricadrInstance(object):
         self.host = host
         self.port = str(port)
 
-        self._test_access():
+        self._test_access()
 
         # Initialize Clients
-        args = (self)
-        self.repository = RepositoryClient(*args)
+        args = (self.host, self.port)
+        self.file = FileClient(*args)
         self.task = TaskClient(*args)
 
     def __str__(self):
-        return '<BarricadrInstance at %s : %s>' % self.host self.port
+        return '<BarricadrInstance at {}:{}>'.format(self.host, self.port)
 
     def _test_access(self):
         try:

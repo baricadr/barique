@@ -20,19 +20,19 @@ class Client(object):
         self.host = host
         self.port = str(port)
 
-    def _api_call(call_type, endpoint, body={}):
+    def _api_call(self, call_type, endpoint, body={}):
 
         url = "http://{}:{}{}".format(self.host, self.port, endpoint)
 
         try:
-            if call_type == "GET":
+            if call_type == "get":
                 r = requests.get(url, json=body)
-            elif call_type == "POST":
+            elif call_type == "post":
                 r = requests.post(url, json=body)
 
-            if r.status == "400":
+            if r.status_code == "400":
                 raise BaricadrApiError("API call returned the following error: '{}'".format(r.json()['error']))
-            elif r.status == "502":
+            elif r.status_code == "502":
                 raise BaricadrApiError("Unknown server error")
             else:
                 return r.json()
