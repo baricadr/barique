@@ -10,14 +10,21 @@ from barique.decorators import custom_exception, list_output
     help="Only list files missing from the local path",
     is_flag=True
 )
+@click.option(
+    "--max_depth",
+    help="Restrict to a max depth. Set to 0 for all files.",
+    default="1",
+    show_default=True,
+    type=int
+)
 @pass_context
 @custom_exception
 @list_output
-def cli(ctx, path, compare=False):
+def cli(ctx, path, compare=False, max_depth=1):
     """List files available from a remote repository for a local path
 
 Output:
 
     List of file relative paths
     """
-    return ctx.gi.file.list(path, compare=compare)
+    return ctx.gi.file.list(path, compare=compare, max_depth=max_depth)
