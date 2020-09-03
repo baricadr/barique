@@ -124,7 +124,6 @@ def barique(ctx, instance, verbose, path=None):
     # We abuse this, knowing that calls to one will fail.
     current_ctx = click.get_current_context()
     try:
-        # TODO find a way to pass offline=True when running with -h option or without any subcommand
         ctx.gi = get_instance(instance)
     except TypeError:
         pass

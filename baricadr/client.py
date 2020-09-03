@@ -4,8 +4,9 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import requests
+import re
 
-from baricadr.exceptions import BaricadrConnectionError, BaricadrApiError
+from baricadr.exceptions import BaricadrConnectionError, BaricadrApiError, BaricadrNotImplementedError
 
 from future import standard_library
 
@@ -16,13 +17,14 @@ class Client(object):
     Base client class implementing methods to make queries to the server
     """
 
-    def __init__(self, host, port):
+    def __init__(self, host, port, endpoints):
         self.host = host
         self.port = str(port)
+        self.endpoints = endpoints
 
-    def _api_call(self, call_type, endpoint, body={}):
+    def _api_call(self, call_type, endpoint_name, body={}):
 
-        url = "http://{}:{}{}".format(self.host, self.port, endpoint)
+        url = self._format_url(call_type, endpoint_name, body)
 
         try:
             if call_type == "get":
@@ -30,12 +32,32 @@ class Client(object):
             elif call_type == "post":
                 r = requests.post(url, json=body)
 
-            if r.status_code == "400":
+            if r.status_code == 400:
                 raise BaricadrApiError("API call returned the following error: '{}'".format(r.json()['error']))
-            elif r.status_code == "502":
+            elif r.status_code == 502:
                 raise BaricadrApiError("Unknown server error")
             else:
                 return r.json()
 
         except requests.exceptions.RequestException:
             raise BaricadrConnectionError("Cannot connect to {}:{}. Please check the connection.".format(self.host,self.port))
+
+    def _format_url(self, call_type, endpoint_name, body):
+
+        endpoint = self.endpoints.get(endpoint_name)
+        if not endpoint:
+            raise BaricadrNotImplementedError()
+
+        # Fill parameters in the url
+        if call_type == "get":
+            groups = re.findall(r'<(.*?)>', endpoint)
+            for group in groups:
+                if group not in body:
+                    raise BaricadrApiError("Missing get parameter " + group)
+                endpoint = endpoint.replace("<{}>".format(group), body.get(group))
+
+        return  "http://{}:{}{}".format(self.host, self.port, endpoint)
+
+
+
+

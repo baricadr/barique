@@ -1,0 +1,23 @@
+project_name: barique
+strict: true
+module:
+    base_module: baricadr
+    instance_cls: "<class 'baricadr.BaricadrInstance'>"
+    instance_func: BaricadrInstance
+    instance_args: []
+    instance_kwargs:
+        host: "0.0.0.0"
+        port: "9100"
+
+    ignore:
+        top_attrs:
+            - 'host'
+            - 'port'
+            - 'endpoints'
+            - '_get_endpoints'
+        funcs:
+            - get
+            - post
+
+documentation: |
+    Bla bla bla

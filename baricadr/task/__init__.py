@@ -24,4 +24,6 @@ class TaskClient(Client):
         :return: Dict
         """
 
-        return self._api_call("get", "/status/" + str(task_id))
+        args = {"task_id": str(task_id)}
+
+        return self._api_call("get", "status_pull", args)

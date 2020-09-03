@@ -13,15 +13,15 @@ standard_library.install_aliases()
 
 class FileClient(Client):
 
-    def list(self, path, compare=False, max_depth=1):
+    def list(self, path, missing=False, max_depth=1):
         """
         List files available from a remote repository for a local path
 
         :type path: str
         :param path: Local path
 
-        :type compare: bool
-        :param compare: Only list files missing from the local path
+        :type missing: bool
+        :param missing: Only list files missing from the local path
 
         :type max_depth: int
         :param max_depth: Restrict to a max depth. Set to 0 for all files.
@@ -30,8 +30,8 @@ class FileClient(Client):
         :return: List of file relative paths
         """
 
-        body = {"path": path, "compare": compare, "max_depth": max_depth}
-        return self._api_call("post", "/get_files", body)
+        body = {"path": path, "missing": missing, "max_depth": max_depth}
+        return self._api_call("post", "list", body)
 
     def pull(self, path, email=""):
         """
@@ -50,4 +50,4 @@ class FileClient(Client):
         if email:
             body['email'] = email
 
-        return self._api_call("post", "/pull", body)['task']
+        return self._api_call("post", "pull_files", body)['task']

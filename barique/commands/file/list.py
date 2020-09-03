@@ -6,7 +6,7 @@ from barique.decorators import custom_exception, list_output
 @click.command('list')
 @click.argument("path", type=str)
 @click.option(
-    "--compare",
+    "--missing",
     help="Only list files missing from the local path",
     is_flag=True
 )
@@ -20,11 +20,11 @@ from barique.decorators import custom_exception, list_output
 @pass_context
 @custom_exception
 @list_output
-def cli(ctx, path, compare=False, max_depth=1):
+def cli(ctx, path, missing=False, max_depth=1):
     """List files available from a remote repository for a local path
 
 Output:
 
     List of file relative paths
     """
-    return ctx.gi.file.list(path, compare=compare, max_depth=max_depth)
+    return ctx.gi.file.list(path, missing=missing, max_depth=max_depth)

@@ -15,3 +15,6 @@ class BaricadrConnectionError(Exception):
     """Raised when the connection to the Barricadr server fails"""
     pass
 
+class BaricadrNotImplementedError(Exception):
+    """Raised when there are not endpoint associated with this function"""
+    pass
