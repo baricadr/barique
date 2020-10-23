@@ -11,6 +11,9 @@ standard_library.install_aliases()
 
 
 class TaskClient(Client):
+    """
+    Track progress of Baricadr tasks
+    """
 
     def show(self, task_id):
         """

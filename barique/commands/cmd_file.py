@@ -5,6 +5,9 @@ from barique.commands.file.pull import cli as pull
 
 @click.group()
 def cli():
+    """
+    Manipulate files managed by Baricadr
+    """
     pass
 
 

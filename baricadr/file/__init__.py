@@ -11,6 +11,9 @@ standard_library.install_aliases()
 
 
 class FileClient(Client):
+    """
+    Manipulate files managed by Baricadr
+    """
 
     def list(self, path, missing=False, max_depth=1):
         """
