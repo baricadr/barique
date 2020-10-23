@@ -1,5 +1,7 @@
 # Baricadr client
 
+![Lint](https://github.com/baricadr/baricadr_cli/workflows/Lint/badge.svg?branch=master)
+
 A Python library and CLI for interacting with a (Baricadr)[https://github.com/baricadr/baricadr] server.
 
 ## Installation
