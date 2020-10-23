@@ -3,13 +3,13 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-import requests
-
 from baricadr.exceptions import BaricadrConnectionError
 from baricadr.file import FileClient
 from baricadr.task import TaskClient
 
 from future import standard_library
+
+import requests
 
 standard_library.install_aliases()
 

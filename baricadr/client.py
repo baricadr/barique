@@ -3,10 +3,11 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-import requests
 import re
 
-from baricadr.exceptions import BaricadrConnectionError, BaricadrApiError, BaricadrNotImplementedError
+import requests
+
+from baricadr.exceptions import BaricadrApiError, BaricadrConnectionError, BaricadrNotImplementedError
 
 from future import standard_library
 
