@@ -12,6 +12,7 @@ from future import standard_library
 
 standard_library.install_aliases()
 
+
 class Client(object):
     """
     Base client class implementing methods to make queries to the server
@@ -40,7 +41,7 @@ class Client(object):
                 return r.json()
 
         except requests.exceptions.RequestException:
-            raise BaricadrConnectionError("Cannot connect to {}:{}. Please check the connection.".format(self.host,self.port))
+            raise BaricadrConnectionError("Cannot connect to {}:{}. Please check the connection.".format(self.host, self.port))
 
     def _format_url(self, call_type, endpoint_name, body):
 
@@ -56,8 +57,4 @@ class Client(object):
                     raise BaricadrApiError("Missing get parameter " + group)
                 endpoint = endpoint.replace("<{}>".format(group), body.get(group))
 
-        return  "http://{}:{}{}".format(self.host, self.port, endpoint)
-
-
-
-
+        return "http://{}:{}{}".format(self.host, self.port, endpoint)

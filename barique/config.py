@@ -57,4 +57,4 @@ def _get_instance(instance_name=None):
 def get_instance(instance_name=None):
     conf = _get_instance(instance_name=instance_name)
     return BaricadrInstance(host=conf['host'],
-                         port=conf['port'])
+                            port=conf['port'])

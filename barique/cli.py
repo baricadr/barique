@@ -120,7 +120,7 @@ def barique(ctx, instance, verbose, path=None):
     if path is not None and len(path) > 0:
         set_global_config_path(path)
     # We abuse this, knowing that calls to one will fail.
-    current_ctx = click.get_current_context()
+    click.get_current_context()
     try:
         ctx.gi = get_instance(instance)
     except TypeError:

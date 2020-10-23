@@ -13,6 +13,7 @@ from future import standard_library
 
 standard_library.install_aliases()
 
+
 class BaricadrInstance(object):
 
     def __init__(self, host="localhost", port="9100", **kwargs):
@@ -31,9 +32,9 @@ class BaricadrInstance(object):
 
     def _get_endpoints(self):
         try:
-            r = requests.get("http://{}:{}/endpoints".format(self.host,self.port))
+            r = requests.get("http://{}:{}/endpoints".format(self.host, self.port))
             if not r.status_code == 200:
                 raise requests.exceptions.RequestException
             return r.json()
         except requests.exceptions.RequestException:
-            raise BaricadrConnectionError("Cannot connect to {}:{}. Please check the connection.".format(self.host,self.port))
+            raise BaricadrConnectionError("Cannot connect to {}:{}. Please check the connection.".format(self.host, self.port))
