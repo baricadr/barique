@@ -7,9 +7,9 @@ import re
 
 from baricadr.exceptions import BaricadrApiError, BaricadrConnectionError, BaricadrNotImplementedError
 
-import requests
-
 from future import standard_library
+
+import requests
 
 standard_library.install_aliases()
 
