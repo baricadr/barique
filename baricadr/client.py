@@ -5,9 +5,9 @@ from __future__ import unicode_literals
 
 import re
 
-import requests
-
 from baricadr.exceptions import BaricadrApiError, BaricadrConnectionError, BaricadrNotImplementedError
+
+import requests
 
 from future import standard_library
 
