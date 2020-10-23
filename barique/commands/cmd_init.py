@@ -8,8 +8,8 @@ from barique.cli import pass_context
 from barique import config
 from barique.io import warn, info
 
-CONFIG_TEMPLATE = """## Chado's barique: Global Configuration File.
-# Each stanza should contain a single chado server to control.
+CONFIG_TEMPLATE = """## Baricadr's barique: Global Configuration File.
+# Each stanza should contain a single baricadr server to control.
 #
 # You can set the key __default to the name of a default instance
 __default: local

@@ -115,9 +115,7 @@ class bariqueCLI(click.MultiCommand):
 )
 @pass_context
 def barique(ctx, instance, verbose, path=None):
-    """Command line wrappers around Python-Chado functions. While this sounds
-    unexciting, with barique and jq you can easily build powerful command line
-    scripts."""
+    """Command line wrappers around Baricadr functions."""
     # set config_path if provided
     if path is not None and len(path) > 0:
         set_global_config_path(path)

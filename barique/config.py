@@ -10,7 +10,7 @@ DEFAULT_CONFIG = {
 }
 
 _config_path = os.environ.get(
-    "CHAKIN_GLOBAL_CONFIG_PATH",
+    "BARIQUE_GLOBAL_CONFIG_PATH",
     "~/.barique.yml"
 )
 _config_path = os.path.expanduser(_config_path)
