@@ -12,6 +12,13 @@ $ pip install baricadr   # Not ready yet
 # On first use you'll need to create a config file to connect to the server, just run:
 
 $ barique init
+Welcome to Barique
+Baricadr server host: localhost
+Baricadr server port: 9100
+Testing connection...
+Ok! Everything looks good.
+Ready to go! Type `barique` to get a list of commands you can execute.
+
 ```
 
 This will create a barique config file in ~/.barique.yml
