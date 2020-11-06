@@ -15,7 +15,7 @@ class FileClient(Client):
     Manipulate files managed by Baricadr
     """
 
-    def list(self, path, missing=False, max_depth=1):
+    def list(self, path, missing=False, max_depth=1, from_root=False):
         """
         List files available from a remote repository for a local path
 
@@ -28,11 +28,14 @@ class FileClient(Client):
         :type max_depth: int
         :param max_depth: Restrict to a max depth. Set to 0 for all files.
 
+        :type from_root: bool
+        :param from_root: Return full paths from root of the repo (instead of relative to given path)
+
         :rtype: list
         :return: List of file relative paths
         """
 
-        body = {"path": path, "missing": missing, "max_depth": max_depth}
+        body = {"path": path, "missing": missing, "max_depth": max_depth, "from_root": from_root}
         return self._api_call("post", "list", body)
 
     def pull(self, path, email=""):
@@ -43,7 +46,7 @@ class FileClient(Client):
         :param path: Local path to a missing file or folder
 
         :type email: str
-        :param email: User email adress for notificatio
+        :param email: User email adress for notification
 
         :rtype: str
         :return: Id associated to the pull task
@@ -52,4 +55,30 @@ class FileClient(Client):
         if email:
             body['email'] = email
 
-        return self._api_call("post", "pull_files", body)['task']
+        return self._api_call("post", "pull", body)['task']
+
+    def freeze(self, path, force=False, dry_run=False, email=""):
+        """
+        Launch a freeze task
+
+        :type path: str
+        :param path: Local path to a file or folder to freeze
+
+        :type force: bool
+        :param force: Force freezing, even if the freezing delay was not reached
+
+        :type dry_run: bool
+        :param dry_run: Do not make any deletion, just list changes that would be made
+
+        :type email: str
+        :param email: User email adress for notification
+
+        :rtype: str
+        :return: Id associated to the freeze task
+        """
+        body = {"path": path, "force": force, "dry_run": dry_run}
+
+        if email:
+            body['email'] = email
+
+        return self._api_call("post", "freeze", body)['task']

@@ -7,7 +7,7 @@ from barique.decorators import custom_exception, str_output
 @click.argument("path", type=str)
 @click.option(
     "--email",
-    help="User email adress for notificatio",
+    help="User email adress for notification",
     type=str
 )
 @pass_context

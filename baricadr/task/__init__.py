@@ -15,6 +15,16 @@ class TaskClient(Client):
     Track progress of Baricadr tasks
     """
 
+    def list(self):
+        """
+        List recent tasks
+
+        :rtype: list
+        :return: List of tasks
+        """
+
+        return self._api_call("get", "tasks")
+
     def show(self, task_id):
         """
         Show task with the selected id
@@ -28,4 +38,14 @@ class TaskClient(Client):
 
         args = {"task_id": str(task_id)}
 
-        return self._api_call("get", "status_pull", args)
+        return self._api_call("get", "task_show", args)
+
+    def zombies(self):
+        """
+        Kill zombie tasks
+
+        :rtype: dict
+        :return: Task id
+        """
+
+        return self._api_call("get", "zombie")
