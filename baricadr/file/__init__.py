@@ -15,7 +15,7 @@ class FileClient(Client):
     Manipulate files managed by Baricadr
     """
 
-    def list(self, path, missing=False, max_depth=1, from_root=False):
+    def list(self, path, full=False, missing=False, max_depth=1, from_root=False):
         """
         List files available from a remote repository for a local path
 
@@ -24,6 +24,9 @@ class FileClient(Client):
 
         :type missing: bool
         :param missing: Only list files missing from the local path
+
+        :type full: bool
+        :param full: List full information for each file (size (in bytes), mtime, etc..)
 
         :type max_depth: int
         :param max_depth: Restrict to a max depth. Set to 0 for all files.
@@ -35,7 +38,7 @@ class FileClient(Client):
         :return: List of file relative paths
         """
 
-        body = {"path": path, "missing": missing, "max_depth": max_depth, "from_root": from_root}
+        body = {"path": path, "missing": missing, "max_depth": max_depth, "from_root": from_root, "full": full}
         return self._api_call("post", "list", body)
 
     def pull(self, path, email=""):

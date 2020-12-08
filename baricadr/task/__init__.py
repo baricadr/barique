@@ -23,7 +23,7 @@ class TaskClient(Client):
         :return: List of tasks
         """
 
-        return self._api_call("get", "tasks")
+        return self._api_call("get", "task_list")
 
     def show(self, task_id):
         """
@@ -39,6 +39,22 @@ class TaskClient(Client):
         args = {"task_id": str(task_id)}
 
         return self._api_call("get", "task_show", args)
+
+    def remove(self, task_id):
+        """
+        Remove task with the selected id
+
+        :type task_id: str
+        :param task_id: Task id
+
+        :rtype: dict
+        :return: Dict
+        """
+
+        args = {"task_id": str(task_id)}
+
+        return self._api_call("get", "task_remove", args)
+
 
     def zombies(self):
         """
