@@ -55,7 +55,6 @@ class TaskClient(Client):
 
         return self._api_call("get", "task_remove", args)
 
-
     def zombies(self):
         """
         Kill zombie tasks
