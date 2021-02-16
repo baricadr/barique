@@ -62,3 +62,6 @@ def cli(ctx, url=None, api_key=None, admin=False, **kwds):
             'port': port,
         })
         info(SUCCESS_MESSAGE)
+
+    # We don't want other users to look into this file
+    os.chmod(config_path, 0o600)
