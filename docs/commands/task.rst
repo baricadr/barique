@@ -28,6 +28,52 @@ List recent tasks
       -h, --help  Show this message and exit.
     
 
+``log`` command
+---------------
+
+**Usage**::
+
+    barique task log [OPTIONS] TASK_ID
+
+**Help**
+
+Show log from the task with the specified id
+
+
+**Output**
+
+
+    Dict
+    
+**Options**::
+
+
+      -h, --help  Show this message and exit.
+    
+
+``remove`` command
+------------------
+
+**Usage**::
+
+    barique task remove [OPTIONS] TASK_ID
+
+**Help**
+
+Remove task with the selected id
+
+
+**Output**
+
+
+    Dict
+    
+**Options**::
+
+
+      -h, --help  Show this message and exit.
+    
+
 ``show`` command
 ----------------
 
@@ -37,7 +83,7 @@ List recent tasks
 
 **Help**
 
-Show task with the selected id
+Show task with the specified id
 
 
 **Output**

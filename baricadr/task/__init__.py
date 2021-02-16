@@ -27,7 +27,7 @@ class TaskClient(Client):
 
     def show(self, task_id):
         """
-        Show task with the selected id
+        Show task with the specified id
 
         :type task_id: str
         :param task_id: Task id
@@ -39,6 +39,21 @@ class TaskClient(Client):
         args = {"task_id": str(task_id)}
 
         return self._api_call("get", "task_show", args)
+
+    def log(self, task_id):
+        """
+        Show log from the task with the specified id
+
+        :type task_id: str
+        :param task_id: Task id
+
+        :rtype: dict
+        :return: Dict
+        """
+
+        args = {"task_id": str(task_id)}
+
+        return self._api_call("get", "task_log", args)
 
     def remove(self, task_id):
         """

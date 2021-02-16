@@ -41,7 +41,7 @@ class FileClient(Client):
         body = {"path": path, "missing": missing, "max_depth": max_depth, "from_root": from_root, "full": full}
         return self._api_call("post", "list", body)
 
-    def pull(self, path, email=""):
+    def pull(self, path, email="", dry_run=False):
         """
         Launch a pull task
 
@@ -51,10 +51,13 @@ class FileClient(Client):
         :type email: str
         :param email: User email adress for notification
 
+        :type dry_run: bool
+        :param dry_run: Do not make any pull, just list changes that would be made
+
         :rtype: str
         :return: Id associated to the pull task
         """
-        body = {"path": path}
+        body = {"path": path, "dry_run": dry_run}
         if email:
             body['email'] = email
 

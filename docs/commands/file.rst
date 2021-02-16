@@ -51,6 +51,9 @@ List files available from a remote repository for a local path
 **Options**::
 
 
+      --full               List full information for each file (size (in bytes),
+                           mtime, etc..)
+    
       --missing            Only list files missing from the local path
       --max_depth INTEGER  Restrict to a max depth. Set to 0 for all files.
                            [default: 1]
@@ -82,5 +85,6 @@ Launch a pull task
 
 
       --email TEXT  User email adress for notification
+      --dry_run     Do not make any pull, just list changes that would be made
       -h, --help    Show this message and exit.
     
