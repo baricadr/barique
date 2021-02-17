@@ -73,6 +73,7 @@ $ barique task show 7958b29c-2a14-486c-90f0-585e68ac9f44
     "task_id": "7958b29c-2a14-486c-90f0-585e68ac9f44",
     "type": "freeze"
 }
+
 ```
 
 ## License
