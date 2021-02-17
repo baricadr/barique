@@ -3,7 +3,7 @@ import sys
 
 from recommonmark.parser import CommonMarkParser
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'apollo'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'baricadr'))
 
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon']
 master_doc = 'index'

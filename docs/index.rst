@@ -4,6 +4,7 @@ Welcome to Barique's documentation!
 .. toctree::
    :maxdepth: 2
 
+   README
    commands
    api/baricadr
 
