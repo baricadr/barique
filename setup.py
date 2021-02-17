@@ -17,5 +17,13 @@ setup(
     entry_points='''
         [console_scripts]
         barique=barique.cli:barique
-    '''
+    ''',
+    classifiers=[
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        "Topic :: Scientific/Engineering",
+        "Programming Language :: Python :: 3.7",
+    ]
 )
