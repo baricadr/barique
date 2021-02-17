@@ -1,5 +1,5 @@
-Barique
-=======
+Barique - Python client for Baricadr
+====================================
 
 Contents:
 
