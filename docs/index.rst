@@ -1,5 +1,5 @@
-Welcome to Barique's documentation!
-===================================
+Barique
+=======
 
 Contents:
 

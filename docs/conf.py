@@ -1,19 +1,10 @@
 import os
 import sys
 
-from recommonmark.parser import CommonMarkParser
-
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'baricadr'))
 
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'recommonmark']
 master_doc = 'index'
-
-# The suffix of source filenames.
-source_suffix = ['.rst', '.md']
-
-source_parsers = {
-    '.md': CommonMarkParser,
-}
 
 
 def run_apidoc(_):
