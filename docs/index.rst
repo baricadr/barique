@@ -1,6 +1,8 @@
 Welcome to Barique's documentation!
 ===================================
 
+Contents:
+
 .. toctree::
    :maxdepth: 2
 

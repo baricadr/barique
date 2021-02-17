@@ -1,4 +1,4 @@
-# Barique: a Baricadr client
+# Barique
 
 ![Lint](https://github.com/baricadr/barique/workflows/Lint/badge.svg?branch=master)
 [![Documentation](https://readthedocs.org/projects/barique/badge/?version=latest)](http://barique.readthedocs.io/en/latest/?badge=latest)
