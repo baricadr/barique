@@ -63,6 +63,7 @@ $ barique file freeze /repos/test_repo/file2.txt
 
 # Check the status of a pull task
 $ barique task show 7958b29c-2a14-486c-90f0-585e68ac9f44
+{
     "created": "Wed, 17 Feb 2021 15:16:49 GMT",
     "error": null,
     "finished": "Wed, 17 Feb 2021 15:16:52 GMT",
@@ -71,6 +72,7 @@ $ barique task show 7958b29c-2a14-486c-90f0-585e68ac9f44
     "status": "finished",
     "task_id": "7958b29c-2a14-486c-90f0-585e68ac9f44",
     "type": "freeze"
+}
 ```
 
 ## License

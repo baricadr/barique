@@ -4,7 +4,7 @@ with open('requirements.txt') as f:
     requires = f.read().splitlines()
 
 setup(
-    name="baricadr",
+    name="barique",
     version='0.1.0',
     description="Baricadr library",
     author="Mateo Boudet",
