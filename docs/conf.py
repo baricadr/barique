@@ -3,6 +3,8 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'baricadr'))
 
+project = "Barique"
+
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'recommonmark']
 master_doc = 'index'
 
