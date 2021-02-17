@@ -5,11 +5,11 @@ with open('requirements.txt') as f:
 
 setup(
     name="baricadr",
-    version='0.0.1',
+    version='0.1.0',
     description="Baricadr library",
     author="Mateo Boudet",
     author_email="mateo.boudet@inrae.fr",
-    url="https://github.com/baricadr/baricadr_cli",
+    url="https://github.com/baricadr/barique",
     install_requires=requires,
     packages=find_packages(),
     license='MIT',
@@ -18,4 +18,4 @@ setup(
         [console_scripts]
         barique=barique.cli:barique
     '''
-    )
+)
