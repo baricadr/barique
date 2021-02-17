@@ -56,5 +56,15 @@ def _get_instance(instance_name=None):
 
 def get_instance(instance_name=None):
     conf = _get_instance(instance_name=instance_name)
+
+    login = None
+    password = None
+    if 'login' in conf and 'password' in conf:
+        login = conf['login']
+        password = conf['password']
+
     return BaricadrInstance(host=conf['host'],
-                            port=conf['port'])
+                            port=conf['port'],
+                            login=login,
+                            password=password,
+                            )

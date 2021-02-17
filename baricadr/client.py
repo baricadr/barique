@@ -19,20 +19,26 @@ class Client(object):
     Base client class implementing methods to make queries to the server
     """
 
-    def __init__(self, host, port, endpoints):
+    def __init__(self, host, port, login, password, endpoints):
         self.host = host
         self.port = str(port)
+        self.login = login
+        self.password = password
         self.endpoints = endpoints
 
     def _api_call(self, call_type, endpoint_name, body={}):
 
         url = self._format_url(call_type, endpoint_name, body)
 
+        auth = None
+        if self.login and self.password:
+            auth = (self.login, self.password)
+
         try:
             if call_type == "get":
-                r = requests.get(url, json=body)
+                r = requests.get(url, json=body, auth=auth)
             elif call_type == "post":
-                r = requests.post(url, json=body)
+                r = requests.post(url, json=body, auth=auth)
 
             if r.status_code == 400:
                 raise BaricadrApiError("API call returned the following error: '{}'".format(r.json()['error']))

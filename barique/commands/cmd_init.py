@@ -18,6 +18,18 @@ local:
     port: "%(port)s"
 """
 
+CONFIG_TEMPLATE_AUTH = """## Baricadr's barique: Global Configuration File.
+# Each stanza should contain a single baricadr server to control.
+#
+# You can set the key __default to the name of a default instance
+__default: local
+local:
+    host: "%(host)s"
+    port: "%(port)s"
+    login: "%(login)s"
+    password: "%(password)s"
+"""
+
 SUCCESS_MESSAGE = (
     "Ready to go! Type `barique` to get a list of commands you can execute."
 )
@@ -38,10 +50,15 @@ def cli(ctx, url=None, api_key=None, admin=False, **kwds):
         # Check environment
         host = click.prompt("Baricadr server host")
         port = click.prompt("Baricadr server port")
+        login = None
+        password = None
+        if click.confirm("""Is your Baricadr instance running behind an authentication proxy?"""):
+            login = click.prompt("Baricadr username")
+            password = click.prompt("Baricadr password", hide_input=True)
 
         info("Testing connection...")
         try:
-            instance = BaricadrInstance(host=host, port=port)
+            BaricadrInstance(host=host, port=port, login=login, password=password)
             # We do a connection test during startup.
             info("Ok! Everything looks good.")
             break
@@ -57,10 +74,18 @@ def cli(ctx, url=None, api_key=None, admin=False, **kwds):
         return -1
 
     with open(config_path, "w") as f:
-        f.write(CONFIG_TEMPLATE % {
-            'host': host,
-            'port': port,
-        })
+        if login and password:
+            f.write(CONFIG_TEMPLATE_AUTH % {
+                'host': host,
+                'port': port,
+                'login': login,
+                'password': password,
+            })
+        else:
+            f.write(CONFIG_TEMPLATE % {
+                'host': host,
+                'port': port,
+            })
         info(SUCCESS_MESSAGE)
 
     # We don't want other users to look into this file

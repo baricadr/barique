@@ -13,6 +13,8 @@ module:
         top_attrs:
             - 'host'
             - 'port'
+            - 'login'
+            - 'password'
             - 'endpoints'
             - '_get_endpoints'
         funcs:
