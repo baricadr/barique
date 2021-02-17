@@ -5,7 +5,7 @@ with open('requirements.txt') as f:
 
 setup(
     name="barique",
-    version='0.1.0',
+    version='0.1.1',
     description="Baricadr library",
     author="Mateo Boudet",
     author_email="mateo.boudet@inrae.fr",
