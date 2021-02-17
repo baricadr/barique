@@ -1,6 +1,7 @@
 # Barique: a Baricadr client
 
 ![Lint](https://github.com/baricadr/barique/workflows/Lint/badge.svg?branch=master)
+[![Documentation](https://readthedocs.org/projects/barique/badge/?version=latest)](http://barique.readthedocs.io/en/latest/?badge=latest)
 
 A Python client (library and CLI) for interacting with a [Baricadr](https://github.com/baricadr/baricadr) server.
 
