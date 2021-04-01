@@ -24,7 +24,7 @@ class BaricadrInstance(object):
         if prefix and not prefix.startswith("/"):
             prefix = "/" + prefix
 
-        if prefix and not prefix.endswith("/"):
+        if prefix and prefix.endswith("/"):
             prefix = prefix[:-1]
 
         self.login = login
