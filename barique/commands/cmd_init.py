@@ -16,6 +16,7 @@ __default: local
 local:
     host: "%(host)s"
     port: "%(port)s"
+    prefix: "%(prefix)s"
 """
 
 CONFIG_TEMPLATE_AUTH = """## Baricadr's barique: Global Configuration File.
@@ -26,6 +27,7 @@ __default: local
 local:
     host: "%(host)s"
     port: "%(port)s"
+    prefix: "%(prefix)s"
     login: "%(login)s"
     password: "%(password)s"
 """
@@ -50,6 +52,7 @@ def cli(ctx, url=None, api_key=None, admin=False, **kwds):
         # Check environment
         host = click.prompt("Baricadr server host")
         port = click.prompt("Baricadr server port")
+        prefix = click.prompt("Baricadr server url prefix")
         login = None
         password = None
         if click.confirm("""Is your Baricadr instance running behind an authentication proxy?"""):
@@ -58,7 +61,7 @@ def cli(ctx, url=None, api_key=None, admin=False, **kwds):
 
         info("Testing connection...")
         try:
-            BaricadrInstance(host=host, port=port, login=login, password=password)
+            BaricadrInstance(host=host, port=port, prefix=prefix, login=login, password=password)
             # We do a connection test during startup.
             info("Ok! Everything looks good.")
             break
@@ -78,6 +81,7 @@ def cli(ctx, url=None, api_key=None, admin=False, **kwds):
             f.write(CONFIG_TEMPLATE_AUTH % {
                 'host': host,
                 'port': port,
+                'prefix': prefix,
                 'login': login,
                 'password': password,
             })
@@ -85,6 +89,7 @@ def cli(ctx, url=None, api_key=None, admin=False, **kwds):
             f.write(CONFIG_TEMPLATE % {
                 'host': host,
                 'port': port,
+                'prefix': prefix,
             })
         info(SUCCESS_MESSAGE)
 

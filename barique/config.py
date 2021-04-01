@@ -63,8 +63,13 @@ def get_instance(instance_name=None):
         login = conf['login']
         password = conf['password']
 
+    prefix = ""
+    if 'prefix' in conf:
+        prefix = conf['prefix']
+
     return BaricadrInstance(host=conf['host'],
                             port=conf['port'],
+                            prefix=prefix,
                             login=login,
                             password=password,
                             )

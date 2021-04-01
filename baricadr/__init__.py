@@ -16,9 +16,16 @@ standard_library.install_aliases()
 
 class BaricadrInstance(object):
 
-    def __init__(self, host="localhost", port="9100", login=None, password=None, **kwargs):
+    def __init__(self, host="localhost", port="9100", prefix="", login=None, password=None, **kwargs):
         self.host = host
         self.port = str(port)
+        self.prefix = prefix
+
+        if prefix and not prefix.startwith("/"):
+            prefix = "/" + prefix
+
+        if prefix and not prefix.endswith("/"):
+            prefix = prefix[:-1]
 
         self.login = login
         self.password = password
@@ -26,12 +33,12 @@ class BaricadrInstance(object):
         self.endpoints = self._get_endpoints()
 
         # Initialize Clients
-        args = (self.host, self.port, self.login, self.password, self.endpoints)
+        args = (self.host, self.port, self.prefix, self.login, self.password, self.endpoints)
         self.file = FileClient(*args)
         self.task = TaskClient(*args)
 
     def __str__(self):
-        return '<BarricadrInstance at {}:{}>'.format(self.host, self.port)
+        return '<BarricadrInstance at {}:{}{}>'.format(self.host, self.port, self.prefix)
 
     def _get_endpoints(self):
 
@@ -40,7 +47,7 @@ class BaricadrInstance(object):
             auth = (self.login, self.password)
 
         try:
-            r = requests.get("http://{}:{}/endpoints".format(self.host, self.port), auth=auth)
+            r = requests.get("http://{}:{}{}/endpoints".format(self.host, self.port, self.prefix), auth=auth)
             if not r.status_code == 200:
                 raise requests.exceptions.RequestException
             return r.json()

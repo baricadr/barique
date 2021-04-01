@@ -19,10 +19,11 @@ class Client(object):
     Base client class implementing methods to make queries to the server
     """
 
-    def __init__(self, host, port, login, password, endpoints):
+    def __init__(self, host, port, prefix, login, password, endpoints):
         self.host = host
         self.port = str(port)
         self.login = login
+        self.prefix = prefix
         self.password = password
         self.endpoints = endpoints
 
@@ -48,7 +49,7 @@ class Client(object):
                 return r.json()
 
         except requests.exceptions.RequestException:
-            raise BaricadrConnectionError("Cannot connect to {}:{}. Please check the connection.".format(self.host, self.port))
+            raise BaricadrConnectionError("Cannot connect to {}:{}{}. Please check the connection.".format(self.host, self.port, self.prefix))
 
     def _format_url(self, call_type, endpoint_name, body):
 
@@ -64,4 +65,4 @@ class Client(object):
                     raise BaricadrApiError("Missing get parameter " + group)
                 endpoint = endpoint.replace("<{}>".format(group), body.get(group))
 
-        return "http://{}:{}{}".format(self.host, self.port, endpoint)
+        return "http://{}:{}{}{}".format(self.host, self.port, self.prefix, endpoint)

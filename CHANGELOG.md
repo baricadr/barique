@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- `prefix` option for baricadr server url
+
 ## [0.1.2] - 2021-03-17
 
 ### Changed
