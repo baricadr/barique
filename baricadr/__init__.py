@@ -21,7 +21,7 @@ class BaricadrInstance(object):
         self.port = str(port)
         self.prefix = prefix
 
-        if prefix and not prefix.startwith("/"):
+        if prefix and not prefix.startswith("/"):
             prefix = "/" + prefix
 
         if prefix and not prefix.endswith("/"):
