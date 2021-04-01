@@ -14,9 +14,7 @@ CONFIG_TEMPLATE = """## Baricadr's barique: Global Configuration File.
 # You can set the key __default to the name of a default instance
 __default: local
 local:
-    host: "%(host)s"
-    port: "%(port)s"
-    prefix: "%(prefix)s"
+    url: "%(url)s"
 """
 
 CONFIG_TEMPLATE_AUTH = """## Baricadr's barique: Global Configuration File.
@@ -25,9 +23,7 @@ CONFIG_TEMPLATE_AUTH = """## Baricadr's barique: Global Configuration File.
 # You can set the key __default to the name of a default instance
 __default: local
 local:
-    host: "%(host)s"
-    port: "%(port)s"
-    prefix: "%(prefix)s"
+    url: "%(url)s"
     login: "%(login)s"
     password: "%(password)s"
 """
@@ -50,9 +46,7 @@ def cli(ctx, url=None, api_key=None, admin=False, **kwds):
 
     while True:
         # Check environment
-        host = click.prompt("Baricadr server host")
-        port = click.prompt("Baricadr server port")
-        prefix = click.prompt("Baricadr server url prefix")
+        url = click.prompt("Baricadr server url")
         login = None
         password = None
         if click.confirm("""Is your Baricadr instance running behind an authentication proxy?"""):
@@ -61,7 +55,7 @@ def cli(ctx, url=None, api_key=None, admin=False, **kwds):
 
         info("Testing connection...")
         try:
-            BaricadrInstance(host=host, port=port, prefix=prefix, login=login, password=password)
+            BaricadrInstance(url=url, login=login, password=password)
             # We do a connection test during startup.
             info("Ok! Everything looks good.")
             break
@@ -79,17 +73,13 @@ def cli(ctx, url=None, api_key=None, admin=False, **kwds):
     with open(config_path, "w") as f:
         if login and password:
             f.write(CONFIG_TEMPLATE_AUTH % {
-                'host': host,
-                'port': port,
-                'prefix': prefix,
+                'url': url,
                 'login': login,
                 'password': password,
             })
         else:
             f.write(CONFIG_TEMPLATE % {
-                'host': host,
-                'port': port,
-                'prefix': prefix,
+                'url': url,
             })
         info(SUCCESS_MESSAGE)
 

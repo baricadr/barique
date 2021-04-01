@@ -16,16 +16,11 @@ standard_library.install_aliases()
 
 class BaricadrInstance(object):
 
-    def __init__(self, host="localhost", port="9100", prefix="", login=None, password=None, **kwargs):
-        self.host = host
-        self.port = str(port)
-        self.prefix = prefix
+    def __init__(self, url="http://localhost:9100/", login=None, password=None, **kwargs):
+        self.url = url
 
-        if self.prefix and not self.prefix.startswith("/"):
-            self.prefix = "/" + self.prefix
-
-        if self.prefix and self.prefix.endswith("/"):
-            self.prefix = self.prefix[:-1]
+        if self.url.endswith("/"):
+            self.url = self.url[:-1]
 
         self.login = login
         self.password = password
@@ -33,12 +28,12 @@ class BaricadrInstance(object):
         self.endpoints = self._get_endpoints()
 
         # Initialize Clients
-        args = (self.host, self.port, self.prefix, self.login, self.password, self.endpoints)
+        args = (self.url, self.login, self.password, self.endpoints)
         self.file = FileClient(*args)
         self.task = TaskClient(*args)
 
     def __str__(self):
-        return '<BarricadrInstance at {}:{}{}>'.format(self.host, self.port, self.prefix)
+        return '<BarricadrInstance at {}>'.format(self.url)
 
     def _get_endpoints(self):
 
@@ -47,9 +42,9 @@ class BaricadrInstance(object):
             auth = (self.login, self.password)
 
         try:
-            r = requests.get("http://{}:{}{}/endpoints".format(self.host, self.port, self.prefix), auth=auth)
+            r = requests.get("{}/endpoints".format(self.url), auth=auth)
             if not r.status_code == 200:
                 raise requests.exceptions.RequestException
             return r.json()
         except requests.exceptions.RequestException:
-            raise BaricadrConnectionError("Cannot connect to {}:{}. Please check the connection.".format(self.host, self.port))
+            raise BaricadrConnectionError("Cannot connect to {}. Please check the connection.".format(self.url))
