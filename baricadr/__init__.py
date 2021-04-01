@@ -21,11 +21,11 @@ class BaricadrInstance(object):
         self.port = str(port)
         self.prefix = prefix
 
-        if prefix and not prefix.startswith("/"):
-            prefix = "/" + prefix
+        if self.prefix and not self.prefix.startswith("/"):
+            self.prefix = "/" + self.prefix
 
-        if prefix and prefix.endswith("/"):
-            prefix = prefix[:-1]
+        if self.prefix and self.prefix.endswith("/"):
+            self.prefix = self.prefix[:-1]
 
         self.login = login
         self.password = password
