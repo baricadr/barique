@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+## [0.1.3] - 2021-04-15
+
+### Changed
+
 - Replace host/port by url in config
 
 ## [0.1.2] - 2021-03-17
