@@ -7,6 +7,8 @@ from baricadr.client import Client
 
 from future import standard_library
 
+from treelib import Node, Tree
+
 standard_library.install_aliases()
 
 
@@ -39,6 +41,11 @@ class FileClient(Client):
         """
 
         body = {"path": path, "missing": missing, "max_depth": max_depth, "from_root": from_root, "full": full}
+
+        if True:
+            self._print_tree(self._api_call("post", "list", body), from_root)
+            return []
+
         return self._api_call("post", "list", body)
 
     def pull(self, path, email="", dry_run=False):
@@ -88,3 +95,42 @@ class FileClient(Client):
             body['email'] = email
 
         return self._api_call("post", "freeze", body)['task']
+
+    def list_tree(self, path, missing=False, max_depth=1, from_root=False):
+        """
+        List files available from a remote repository for a local path as a tree
+
+        :type path: str
+        :param path: Local path
+
+        :type missing: bool
+        :param missing: Only list files missing from the local path
+
+        :type max_depth: int
+        :param max_depth: Restrict to a max depth. Set to 0 for all files.
+
+        :rtype: None
+        :return: None
+        """
+
+        body = {"path": path, "missing": missing, "max_depth": max_depth, "from_root": from_root}
+
+        return self._print_tree(self._api_call("post", "list", body), from_root)
+
+    def _print_tree(self, files, from_root):
+        # Print the paths as a tree
+        current_nodes = set()
+        tree = Tree()
+        tree.create_node(".", ".")
+
+        for path in files:
+            previous = "."
+            for fragment in path["Path"].split("/"):
+                if not fragment:
+                    continue
+                if not fragment in current_nodes:
+                    tree.create_node(fragment, fragment, previous)
+                current_nodes.add(fragment)
+                previous = fragment
+
+        tree.show()
