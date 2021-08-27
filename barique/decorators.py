@@ -45,7 +45,7 @@ def str_output(wrapped, instance, args, kwargs):
 
 @wrapt.decorator
 def None_output(wrapped, instance, args, kwargs):
-    print(wrapped(*args, **kwargs))
+    wrapped(*args, **kwargs)
 
 
 def _arg_split(ctx, param, value):

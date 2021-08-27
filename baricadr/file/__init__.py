@@ -108,11 +108,11 @@ class FileClient(Client):
         :return: None
         """
 
-        body = {"path": path, "missing": missing, "max_depth": max_depth, "from_root": from_root}
+        body = {"path": path, "missing": missing, "max_depth": max_depth}
 
-        return self._print_tree(self._api_call("post", "list", body), from_root)
+        return self._print_tree(self._api_call("post", "list", body))
 
-    def _print_tree(self, files, from_root):
+    def _print_tree(self, files):
         # Print the paths as a tree
         current_nodes = set()
         tree = Tree()
