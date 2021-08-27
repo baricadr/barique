@@ -1,6 +1,7 @@
 import click
 from barique.commands.file.freeze import cli as freeze
 from barique.commands.file.list import cli as list
+from barique.commands.file.list_tree import cli as list_tree
 from barique.commands.file.pull import cli as pull
 
 
@@ -14,4 +15,5 @@ def cli():
 
 cli.add_command(freeze)
 cli.add_command(list)
+cli.add_command(list_tree)
 cli.add_command(pull)

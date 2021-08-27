@@ -41,11 +41,6 @@ class FileClient(Client):
         """
 
         body = {"path": path, "missing": missing, "max_depth": max_depth, "from_root": from_root, "full": full}
-
-        if True:
-            self._print_tree(self._api_call("post", "list", body), from_root)
-            return []
-
         return self._api_call("post", "list", body)
 
     def pull(self, path, email="", dry_run=False):
@@ -96,7 +91,7 @@ class FileClient(Client):
 
         return self._api_call("post", "freeze", body)['task']
 
-    def list_tree(self, path, missing=False, max_depth=1, from_root=False):
+    def list_tree(self, path, missing=False, max_depth=1):
         """
         List files available from a remote repository for a local path as a tree
 

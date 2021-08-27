@@ -11,12 +11,14 @@ module:
 
     ignore:
         top_attrs:
+            - 'url'
             - 'host'
             - 'port'
             - 'login'
             - 'password'
             - 'endpoints'
             - '_get_endpoints'
+            - '_print_tree'
         funcs:
             - get
             - post
