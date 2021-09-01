@@ -116,6 +116,7 @@ class FileClient(Client):
         # Print the paths as a tree
         tree = Tree()
         tree.create_node(".", ".")
+        processed_nodes = set()
 
         for path in files:
             previous = "."
@@ -123,8 +124,10 @@ class FileClient(Client):
             for fragment in path["Path"].split("/"):
                 if not fragment:
                     continue
-                current_id += "_" + fragment
-                tree.create_node(fragment, current_id, previous)
-                previous = fragment
+                current_id = "_" + fragment if current_id else fragment
+                if current_id not in processed_nodes:
+                    tree.create_node(fragment, current_id, previous)
+                    processed_nodes.add(current_id)
+                previous = current_id
 
         tree.show()
