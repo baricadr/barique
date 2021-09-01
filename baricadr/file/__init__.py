@@ -7,7 +7,7 @@ from baricadr.client import Client
 
 from future import standard_library
 
-from treelib import Node, Tree
+from treelib import Tree
 
 standard_library.install_aliases()
 
@@ -114,18 +114,17 @@ class FileClient(Client):
 
     def _print_tree(self, files):
         # Print the paths as a tree
-        current_nodes = set()
         tree = Tree()
         tree.create_node(".", ".")
 
         for path in files:
             previous = "."
+            current_id = ""
             for fragment in path["Path"].split("/"):
                 if not fragment:
                     continue
-                if not fragment in current_nodes:
-                    tree.create_node(fragment, fragment, previous)
-                current_nodes.add(fragment)
+                current_id += "_" + fragment
+                tree.create_node(fragment, current_id, previous)
                 previous = fragment
 
         tree.show()
