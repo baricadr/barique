@@ -3,7 +3,7 @@ from barique.cli import pass_context, json_loads
 from barique.decorators import custom_exception, None_output
 
 
-@click.command('list_tree')
+@click.command('tree')
 @click.argument("path", type=str)
 @click.option(
     "--missing",
@@ -27,4 +27,4 @@ Output:
 
     None
     """
-    return ctx.gi.file.list_tree(path, missing=missing, max_depth=max_depth)
+    return ctx.gi.file.tree(path, missing=missing, max_depth=max_depth)

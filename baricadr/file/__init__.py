@@ -9,6 +9,8 @@ from future import standard_library
 
 from treelib import Tree
 
+import os
+
 standard_library.install_aliases()
 
 
@@ -91,7 +93,7 @@ class FileClient(Client):
 
         return self._api_call("post", "freeze", body)['task']
 
-    def list_tree(self, path, missing=False, max_depth=1):
+    def tree(self, path, missing=False, max_depth=1):
         """
         List files available from a remote repository for a local path as a tree
 
@@ -121,10 +123,13 @@ class FileClient(Client):
         for path in files:
             previous = "."
             current_id = ""
-            for fragment in path["Path"].split("/"):
-                if not fragment:
-                    continue
+            current_path = path["Path"].rstrip("/")
+            current_file = os.path.basename(current_path)
+            for fragment in current_path.split("/"):
                 current_id = current_id + "_" + fragment if current_id else fragment
+                # If last fragment
+                if fragment == current_file and path['missing']:
+                    fragment += " *"
                 if current_id not in processed_nodes:
                     tree.create_node(fragment, current_id, previous)
                     processed_nodes.add(current_id)
