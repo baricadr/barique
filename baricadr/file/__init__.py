@@ -110,7 +110,7 @@ class FileClient(Client):
 
         body = {"path": path, "missing": missing, "max_depth": max_depth}
 
-        return self._print_tree(self._api_call("post", "list", body))
+        return self._print_tree(self._api_call("post", "tree", body))
 
     def _print_tree(self, files):
         # Print the paths as a tree
