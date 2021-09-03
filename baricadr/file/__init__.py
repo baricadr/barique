@@ -93,15 +93,12 @@ class FileClient(Client):
 
         return self._api_call("post", "freeze", body)['task']
 
-    def tree(self, path, missing=False, max_depth=1):
+    def tree(self, path, max_depth=1):
         """
         List files available from a remote repository for a local path as a tree
 
         :type path: str
         :param path: Local path
-
-        :type missing: bool
-        :param missing: Only list files missing from the local path
 
         :type max_depth: int
         :param max_depth: Restrict to a max depth. Set to 0 for all files.
@@ -110,7 +107,7 @@ class FileClient(Client):
         :return: None
         """
 
-        body = {"path": path, "missing": missing, "max_depth": max_depth}
+        body = {"path": path, "max_depth": max_depth}
 
         return self._print_tree(self._api_call("post", "tree", body))
 

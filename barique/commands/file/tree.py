@@ -6,11 +6,6 @@ from barique.decorators import custom_exception, None_output
 @click.command('tree')
 @click.argument("path", type=str)
 @click.option(
-    "--missing",
-    help="Only list files missing from the local path",
-    is_flag=True
-)
-@click.option(
     "--max_depth",
     help="Restrict to a max depth. Set to 0 for all files.",
     default="1",
@@ -20,11 +15,11 @@ from barique.decorators import custom_exception, None_output
 @pass_context
 @custom_exception
 @None_output
-def cli(ctx, path, missing=False, max_depth=1):
+def cli(ctx, path, max_depth=1):
     """List files available from a remote repository for a local path as a tree
 
 Output:
 
     None
     """
-    return ctx.gi.file.tree(path, missing=missing, max_depth=max_depth)
+    return ctx.gi.file.tree(path, max_depth=max_depth)
