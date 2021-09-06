@@ -7,9 +7,9 @@ from baricadr.client import Client
 
 from future import standard_library
 
-from treelib import Tree
-
 import os
+
+from treelib import Tree
 
 standard_library.install_aliases()
 
