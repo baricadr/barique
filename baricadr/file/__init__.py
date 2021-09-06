@@ -7,6 +7,10 @@ from baricadr.client import Client
 
 from future import standard_library
 
+from treelib import Tree
+
+import os
+
 standard_library.install_aliases()
 
 
@@ -88,3 +92,45 @@ class FileClient(Client):
             body['email'] = email
 
         return self._api_call("post", "freeze", body)['task']
+
+    def tree(self, path, max_depth=1):
+        """
+        List files available from a remote repository for a local path as a tree
+
+        :type path: str
+        :param path: Local path
+
+        :type max_depth: int
+        :param max_depth: Restrict to a max depth. Set to 0 for all files.
+
+        :rtype: None
+        :return: None
+        """
+
+        body = {"path": path, "max_depth": max_depth}
+
+        return self._print_tree(self._api_call("post", "tree", body), path)
+
+    def _print_tree(self, files, asked_path):
+        asked_path = asked_path.rstrip("/")
+        # Print the paths as a tree
+        tree = Tree()
+        tree.create_node(asked_path, ".")
+        processed_nodes = set()
+
+        for path in files:
+            previous = "."
+            current_id = ""
+            current_path = path["Path"].rstrip("/")
+            current_file = os.path.basename(current_path)
+            for fragment in current_path.split("/"):
+                current_id = current_id + "_" + fragment if current_id else fragment
+                # If last fragment
+                if fragment == current_file and path['missing']:
+                    fragment += " *"
+                if current_id not in processed_nodes:
+                    tree.create_node(fragment, current_id, previous)
+                    processed_nodes.add(current_id)
+                previous = current_id
+
+        tree.show()
