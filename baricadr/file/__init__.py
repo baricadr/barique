@@ -3,11 +3,11 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import os
+
 from baricadr.client import Client
 
 from future import standard_library
-
-import os
 
 from treelib import Tree
 
