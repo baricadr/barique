@@ -93,7 +93,7 @@ class FileClient(Client):
 
         return self._api_call("post", "freeze", body)['task']
 
-    def tree(self, path, max_depth=1):
+    def tree(self, path, max_depth=0):
         """
         List files available from a remote repository for a local path as a tree
 
