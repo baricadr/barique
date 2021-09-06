@@ -88,3 +88,27 @@ Launch a pull task
       --dry_run     Do not make any pull, just list changes that would be made
       -h, --help    Show this message and exit.
     
+
+``tree`` command
+----------------
+
+**Usage**::
+
+    barique file tree [OPTIONS] PATH
+
+**Help**
+
+List files available from a remote repository for a local path as a tree
+
+
+**Output**
+
+
+    None
+    
+**Options**::
+
+
+      --max_depth INTEGER  Restrict to a max depth. Set to 0 for all files.
+      -h, --help           Show this message and exit.
+    
