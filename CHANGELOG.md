@@ -9,9 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- 'tree' command : List all files in remote in a tree form, tagging missing files with " *"
-
 ### Changed
+
+## [0.1.4] - 2021-09-23
+
+### Added
+
+- 'tree' command : List all files in remote in a tree form, tagging missing files with " *"
 
 ## [0.1.3] - 2021-04-15
 
